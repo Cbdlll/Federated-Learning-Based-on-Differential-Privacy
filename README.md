@@ -30,7 +30,7 @@
 
 1. 克隆仓库：
 ```bash
-git clone <repository-url>
+git clone https://github.com/Cbdlll/Federated-Learning-Based-on-Differential-Privacy.git
 cd federated-learning-dp
 ```
 
