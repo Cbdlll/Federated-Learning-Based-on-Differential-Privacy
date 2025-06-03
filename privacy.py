@@ -3,15 +3,14 @@
 
 import torch
 import numpy as np
-from typing import List, Optional
+from typing import List, Optional, Literal
 
 class PrivacyEngine:
     """
     Implementation of Differential Privacy for Deep Learning using 
     Differentially Private Stochastic Gradient Descent (DP-SGD)
     
-    Based on the paper: "Deep Learning with Differential Privacy"
-    https://arxiv.org/abs/1607.00133
+    Supports both Gaussian and Laplace noise mechanisms.
     """
     def __init__(self, 
                  model: torch.nn.Module,
@@ -21,7 +20,8 @@ class PrivacyEngine:
                  noise_multiplier: Optional[float] = None,
                  max_grad_norm: float = 1.0,
                  epsilon: float = 1.0,
-                 delta: float = 1e-5):
+                 delta: float = 1e-5,
+                 noise_type: Literal["gaussian", "laplace"] = "gaussian"):
         """
         Initialize the privacy engine
         
@@ -34,6 +34,7 @@ class PrivacyEngine:
             max_grad_norm: The maximum L2 norm of per-sample gradients
             epsilon: The privacy budget epsilon
             delta: The privacy budget delta
+            noise_type: Type of noise to add ("gaussian" or "laplace")
         """
         self.model = model
         self.batch_size = batch_size
@@ -42,6 +43,8 @@ class PrivacyEngine:
         self.max_grad_norm = max_grad_norm
         self.epsilon = epsilon
         self.delta = delta
+        self.device = next(model.parameters()).device
+        self.noise_type = noise_type
         
         # If noise_multiplier is not provided, estimate it from epsilon and delta
         if noise_multiplier is None:
@@ -87,13 +90,21 @@ class PrivacyEngine:
                     # Clip gradients
                     param.grad.data = self._clip_gradients(param.grad.data)
                     
-                    # Add noise
-                    noise = torch.normal(
-                        mean=0,
-                        std=self.noise_multiplier * self.max_grad_norm,
-                        size=param.grad.shape,
-                        device=param.grad.device
-                    )
+                    # Add noise based on selected mechanism
+                    if self.noise_type == "gaussian":
+                        noise = torch.normal(
+                            mean=0,
+                            std=self.noise_multiplier * self.max_grad_norm,
+                            size=param.grad.shape,
+                            device=param.grad.device
+                        )
+                    elif self.noise_type == "laplace":
+                        # Laplace noise with scale parameter b = noise_multiplier * max_grad_norm / sqrt(2)
+                        # For Laplace distribution with scale b, the standard deviation is sqrt(2) * b
+                        scale = self.noise_multiplier * self.max_grad_norm / np.sqrt(2)
+                        uniform = torch.rand(param.grad.shape, device=param.grad.device) - 0.5
+                        noise = -scale * torch.sign(uniform) * torch.log(1 - 2 * torch.abs(uniform))
+                    
                     param.grad.data.add_(noise)
                     
     def _clip_gradients(self, grad):
@@ -141,10 +152,15 @@ class PrivacyEngine:
         # Compute RDP for each alpha
         rdp = []
         for alpha in self.alphas:
-            # RDP for Gaussian mechanism with sampling
-            # This is a simplified version - in practice use a proper implementation
-            temp = q * q * alpha / (self.noise_multiplier * self.noise_multiplier)
-            rdp.append(temp * self.steps)
+            if self.noise_type == "gaussian":
+                # RDP for Gaussian mechanism with sampling
+                temp = q * q * alpha / (self.noise_multiplier * self.noise_multiplier)
+                rdp.append(temp * self.steps)
+            elif self.noise_type == "laplace":
+                # RDP for Laplace mechanism with sampling
+                # This is an approximation - in practice use a more accurate formula
+                temp = q * q * alpha * (alpha + 1) / (2 * self.noise_multiplier * self.noise_multiplier)
+                rdp.append(temp * self.steps)
             
         return rdp
     

@@ -1,0 +1,108 @@
+(repo) root@autodl-container-e9154787cb-ccfb0a9e:~/Federated-Learning-Based-on-Differential-Privacy# python main.py --num_workers 64 --batch_size 1024
+Using GPU: NVIDIA GeForce RTX 3090
+GPU Memory: 25.31 GB
+2025-06-02 19:31:01,545 - federated_learning - INFO - Starting Federated Learning with 10 clients
+2025-06-02 19:31:01,546 - federated_learning - INFO - Using device: cuda
+2025-06-02 19:31:01,759 - federated_learning - INFO - Initialized server with 10 clients
+2025-06-02 19:31:01,759 - federated_learning - INFO - Using GPU: NVIDIA GeForce RTX 3090
+2025-06-02 19:31:01,759 - federated_learning - INFO - Round 1/50
+2025-06-02 19:32:22,048 - federated_learning - INFO - Round 1: Average Loss = 2.4245, Average Accuracy = 0.1101
+2025-06-02 19:32:22,048 - federated_learning - INFO - Round 2/50
+2025-06-02 19:33:41,917 - federated_learning - INFO - Round 2: Average Loss = 2.4348, Average Accuracy = 0.1135
+2025-06-02 19:33:41,917 - federated_learning - INFO - Round 3/50
+2025-06-02 19:35:02,094 - federated_learning - INFO - Round 3: Average Loss = 2.6376, Average Accuracy = 0.0974
+2025-06-02 19:35:02,095 - federated_learning - INFO - Round 4/50
+2025-06-02 19:36:22,060 - federated_learning - INFO - Round 4: Average Loss = 2.5138, Average Accuracy = 0.1032
+2025-06-02 19:36:22,060 - federated_learning - INFO - Round 5/50
+2025-06-02 19:37:41,985 - federated_learning - INFO - Round 5: Average Loss = 2.4394, Average Accuracy = 0.0974
+2025-06-02 19:37:41,985 - federated_learning - INFO - Round 6/50
+2025-06-02 19:39:01,868 - federated_learning - INFO - Round 6: Average Loss = 2.4298, Average Accuracy = 0.1135
+2025-06-02 19:39:01,868 - federated_learning - INFO - Round 7/50
+2025-06-02 19:40:21,449 - federated_learning - INFO - Round 7: Average Loss = 2.4161, Average Accuracy = 0.1032
+2025-06-02 19:40:21,450 - federated_learning - INFO - Round 8/50
+2025-06-02 19:41:40,797 - federated_learning - INFO - Round 8: Average Loss = 2.8169, Average Accuracy = 0.1028
+2025-06-02 19:41:40,798 - federated_learning - INFO - Round 9/50
+2025-06-02 19:43:00,246 - federated_learning - INFO - Round 9: Average Loss = 2.5663, Average Accuracy = 0.1135
+2025-06-02 19:43:00,247 - federated_learning - INFO - Round 10/50
+2025-06-02 19:44:20,388 - federated_learning - INFO - Round 10: Average Loss = 3.0278, Average Accuracy = 0.1028
+2025-06-02 19:44:20,389 - federated_learning - INFO - Round 11/50
+2025-06-02 19:45:40,748 - federated_learning - INFO - Round 11: Average Loss = 2.5832, Average Accuracy = 0.0980
+2025-06-02 19:45:40,748 - federated_learning - INFO - Round 12/50
+2025-06-02 19:47:00,728 - federated_learning - INFO - Round 12: Average Loss = 2.7789, Average Accuracy = 0.1028
+2025-06-02 19:47:00,728 - federated_learning - INFO - Round 13/50
+2025-06-02 19:48:20,403 - federated_learning - INFO - Round 13: Average Loss = 2.4088, Average Accuracy = 0.1135
+2025-06-02 19:48:20,404 - federated_learning - INFO - Round 14/50
+2025-06-02 19:49:40,032 - federated_learning - INFO - Round 14: Average Loss = 2.3813, Average Accuracy = 0.1135
+2025-06-02 19:49:40,032 - federated_learning - INFO - Round 15/50
+2025-06-02 19:50:59,601 - federated_learning - INFO - Round 15: Average Loss = 2.4968, Average Accuracy = 0.0892
+2025-06-02 19:50:59,601 - federated_learning - INFO - Round 16/50
+2025-06-02 19:52:19,267 - federated_learning - INFO - Round 16: Average Loss = 2.4053, Average Accuracy = 0.1135
+2025-06-02 19:52:19,267 - federated_learning - INFO - Round 17/50
+2025-06-02 19:53:39,516 - federated_learning - INFO - Round 17: Average Loss = 2.3884, Average Accuracy = 0.1135
+2025-06-02 19:53:39,516 - federated_learning - INFO - Round 18/50
+2025-06-02 19:54:59,564 - federated_learning - INFO - Round 18: Average Loss = 2.4352, Average Accuracy = 0.0958
+2025-06-02 19:54:59,564 - federated_learning - INFO - Round 19/50
+2025-06-02 19:56:19,669 - federated_learning - INFO - Round 19: Average Loss = 2.4920, Average Accuracy = 0.1135
+2025-06-02 19:56:19,669 - federated_learning - INFO - Round 20/50
+2025-06-02 19:57:40,506 - federated_learning - INFO - Round 20: Average Loss = 2.5652, Average Accuracy = 0.0958
+2025-06-02 19:57:40,506 - federated_learning - INFO - Round 21/50
+2025-06-02 19:59:00,851 - federated_learning - INFO - Round 21: Average Loss = 2.3692, Average Accuracy = 0.0980
+2025-06-02 19:59:00,851 - federated_learning - INFO - Round 22/50
+2025-06-02 20:00:21,232 - federated_learning - INFO - Round 22: Average Loss = 2.3587, Average Accuracy = 0.0980
+2025-06-02 20:00:21,232 - federated_learning - INFO - Round 23/50
+2025-06-02 20:01:42,271 - federated_learning - INFO - Round 23: Average Loss = 2.3470, Average Accuracy = 0.1135
+2025-06-02 20:01:42,271 - federated_learning - INFO - Round 24/50
+2025-06-02 20:03:02,937 - federated_learning - INFO - Round 24: Average Loss = 2.3787, Average Accuracy = 0.0980
+2025-06-02 20:03:02,937 - federated_learning - INFO - Round 25/50
+2025-06-02 20:04:22,119 - federated_learning - INFO - Round 25: Average Loss = 2.3825, Average Accuracy = 0.1135
+2025-06-02 20:04:22,119 - federated_learning - INFO - Round 26/50
+2025-06-02 20:05:41,217 - federated_learning - INFO - Round 26: Average Loss = 2.3274, Average Accuracy = 0.1135
+2025-06-02 20:05:41,218 - federated_learning - INFO - Round 27/50
+2025-06-02 20:07:00,785 - federated_learning - INFO - Round 27: Average Loss = 2.3414, Average Accuracy = 0.1135
+2025-06-02 20:07:00,786 - federated_learning - INFO - Round 28/50
+2025-06-02 20:08:19,889 - federated_learning - INFO - Round 28: Average Loss = 2.3503, Average Accuracy = 0.1135
+2025-06-02 20:08:19,889 - federated_learning - INFO - Round 29/50
+2025-06-02 20:09:39,187 - federated_learning - INFO - Round 29: Average Loss = 2.3432, Average Accuracy = 0.1135
+2025-06-02 20:09:39,187 - federated_learning - INFO - Round 30/50
+2025-06-02 20:10:58,324 - federated_learning - INFO - Round 30: Average Loss = 2.3383, Average Accuracy = 0.0980
+2025-06-02 20:10:58,324 - federated_learning - INFO - Round 31/50
+2025-06-02 20:12:17,652 - federated_learning - INFO - Round 31: Average Loss = 2.3301, Average Accuracy = 0.0980
+2025-06-02 20:12:17,653 - federated_learning - INFO - Round 32/50
+2025-06-02 20:13:37,372 - federated_learning - INFO - Round 32: Average Loss = 2.3324, Average Accuracy = 0.1135
+2025-06-02 20:13:37,372 - federated_learning - INFO - Round 33/50
+2025-06-02 20:14:56,784 - federated_learning - INFO - Round 33: Average Loss = 2.3229, Average Accuracy = 0.0980
+2025-06-02 20:14:56,784 - federated_learning - INFO - Round 34/50
+2025-06-02 20:16:16,194 - federated_learning - INFO - Round 34: Average Loss = 2.3117, Average Accuracy = 0.0980
+2025-06-02 20:16:16,194 - federated_learning - INFO - Round 35/50
+2025-06-02 20:17:35,668 - federated_learning - INFO - Round 35: Average Loss = 2.3214, Average Accuracy = 0.1032
+2025-06-02 20:17:35,669 - federated_learning - INFO - Round 36/50
+2025-06-02 20:18:55,097 - federated_learning - INFO - Round 36: Average Loss = 2.3200, Average Accuracy = 0.0982
+2025-06-02 20:18:55,097 - federated_learning - INFO - Round 37/50
+2025-06-02 20:20:14,595 - federated_learning - INFO - Round 37: Average Loss = 2.3179, Average Accuracy = 0.0974
+2025-06-02 20:20:14,595 - federated_learning - INFO - Round 38/50
+2025-06-02 20:21:34,085 - federated_learning - INFO - Round 38: Average Loss = 2.3264, Average Accuracy = 0.1135
+2025-06-02 20:21:34,085 - federated_learning - INFO - Round 39/50
+2025-06-02 20:22:53,651 - federated_learning - INFO - Round 39: Average Loss = 2.3373, Average Accuracy = 0.1135
+2025-06-02 20:22:53,651 - federated_learning - INFO - Round 40/50
+2025-06-02 20:24:13,339 - federated_learning - INFO - Round 40: Average Loss = 2.3237, Average Accuracy = 0.1009
+2025-06-02 20:24:13,339 - federated_learning - INFO - Round 41/50
+2025-06-02 20:25:33,298 - federated_learning - INFO - Round 41: Average Loss = 2.3297, Average Accuracy = 0.1135
+2025-06-02 20:25:33,298 - federated_learning - INFO - Round 42/50
+2025-06-02 20:26:52,881 - federated_learning - INFO - Round 42: Average Loss = 2.3217, Average Accuracy = 0.1009
+2025-06-02 20:26:52,882 - federated_learning - INFO - Round 43/50
+2025-06-02 20:28:12,391 - federated_learning - INFO - Round 43: Average Loss = 2.3233, Average Accuracy = 0.1028
+2025-06-02 20:28:12,391 - federated_learning - INFO - Round 44/50
+2025-06-02 20:29:31,588 - federated_learning - INFO - Round 44: Average Loss = 2.3142, Average Accuracy = 0.0974
+2025-06-02 20:29:31,588 - federated_learning - INFO - Round 45/50
+2025-06-02 20:30:51,084 - federated_learning - INFO - Round 45: Average Loss = 2.3566, Average Accuracy = 0.0980
+2025-06-02 20:30:51,084 - federated_learning - INFO - Round 46/50
+2025-06-02 20:32:10,400 - federated_learning - INFO - Round 46: Average Loss = 2.3394, Average Accuracy = 0.1010
+2025-06-02 20:32:10,401 - federated_learning - INFO - Round 47/50
+2025-06-02 20:33:30,236 - federated_learning - INFO - Round 47: Average Loss = 2.3654, Average Accuracy = 0.1010
+2025-06-02 20:33:30,237 - federated_learning - INFO - Round 48/50
+2025-06-02 20:34:50,010 - federated_learning - INFO - Round 48: Average Loss = 2.3536, Average Accuracy = 0.1010
+2025-06-02 20:34:50,010 - federated_learning - INFO - Round 49/50
+2025-06-02 20:36:09,660 - federated_learning - INFO - Round 49: Average Loss = 2.3308, Average Accuracy = 0.1010
+2025-06-02 20:36:09,660 - federated_learning - INFO - Round 50/50
+2025-06-02 20:37:29,612 - federated_learning - INFO - Round 50: Average Loss = 2.3259, Average Accuracy = 0.1010
+2025-06-02 20:37:30,886 - federated_learning - INFO - Final evaluation - Average Loss: 2.3259, Average Accuracy: 0.1010

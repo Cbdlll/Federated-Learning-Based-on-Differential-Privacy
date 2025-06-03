@@ -35,9 +35,9 @@ class LeNet(nn.Module):
     
     def get_params(self):
         """Return model parameters as a list of tensors"""
-        return [p.data for p in self.parameters()]
+        return [p.data.clone() for p in self.parameters()]
 
     def set_params(self, params):
         """Set model parameters from a list of tensors"""
         for p, new_p in zip(self.parameters(), params):
-            p.data = new_p.clone() 
+            p.data = new_p.clone().to(p.device) 

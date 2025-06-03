@@ -44,7 +44,7 @@ pip install -r requirements.txt
 运行联邦学习实验：
 
 ```bash
-python main.py
+python main.py --use_dp True
 ```
 
 ### 可选参数

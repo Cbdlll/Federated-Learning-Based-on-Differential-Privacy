@@ -12,7 +12,7 @@ from privacy import PrivacyEngine
 class Client:
     """Client for federated learning"""
     def __init__(self, client_id, train_data, test_data, batch_size, 
-                 learning_rate, momentum, local_epochs, device):
+                 learning_rate, momentum, local_epochs, noise_type, device):
         self.client_id = client_id
         self.train_data = train_data
         self.test_data = test_data
@@ -20,17 +20,23 @@ class Client:
         self.learning_rate = learning_rate
         self.momentum = momentum
         self.local_epochs = local_epochs
+        self.noise_type = noise_type
         self.device = device
         
         # Initialize the model
         self.model = LeNet().to(self.device)
-        self.criterion = nn.CrossEntropyLoss()
+        self.criterion = nn.CrossEntropyLoss().to(self.device)
         
-    def train(self, global_model=None, use_dp=False, epsilon=1.0, delta=1e-5, max_grad_norm=1.0):
+    def train(self, global_model=None, use_dp=False, epsilon=1.0, delta=1e-5, max_grad_norm=1.0, noise_type='gaussian'):
         """Train the local model with differential privacy if enabled"""
         # If global model provided, set local model parameters to global model parameters
         if global_model is not None:
-            self.model.load_state_dict(copy.deepcopy(global_model.state_dict()))
+            # Ensure the global model is on the same device
+            state_dict = copy.deepcopy(global_model.state_dict())
+            # Move state dict to the appropriate device
+            for key in state_dict:
+                state_dict[key] = state_dict[key].to(self.device)
+            self.model.load_state_dict(state_dict)
         
         # Set up optimizer
         optimizer = optim.SGD(self.model.parameters(), lr=self.learning_rate, momentum=self.momentum)
@@ -45,7 +51,8 @@ class Client:
                 noise_multiplier=None,  # Will be computed from epsilon, delta
                 max_grad_norm=max_grad_norm,
                 epsilon=epsilon,
-                delta=delta
+                delta=delta,
+                noise_type = noise_type
             )
             privacy_engine.attach(optimizer)
         
@@ -54,12 +61,13 @@ class Client:
         
         # Training loop
         train_loader = torch.utils.data.DataLoader(
-            self.train_data, batch_size=self.batch_size, shuffle=True
+            self.train_data, batch_size=self.batch_size, shuffle=True,
+            pin_memory=True if self.device == 'cuda' else False
         )
         
         for epoch in range(self.local_epochs):
             for data, target in train_loader:
-                data, target = data.to(self.device), target.to(self.device)
+                data, target = data.to(self.device, non_blocking=True), target.to(self.device, non_blocking=True)
                 
                 # Zero the parameter gradients
                 optimizer.zero_grad()
@@ -82,11 +90,17 @@ class Client:
     def evaluate(self, global_model=None):
         """Evaluate the model on local test data"""
         if global_model is not None:
-            self.model.load_state_dict(copy.deepcopy(global_model.state_dict()))
+            # Ensure the global model is on the same device
+            state_dict = copy.deepcopy(global_model.state_dict())
+            # Move state dict to the appropriate device
+            for key in state_dict:
+                state_dict[key] = state_dict[key].to(self.device)
+            self.model.load_state_dict(state_dict)
         
         self.model.eval()
         test_loader = torch.utils.data.DataLoader(
-            self.test_data, batch_size=self.batch_size, shuffle=False
+            self.test_data, batch_size=self.batch_size, shuffle=False,
+            pin_memory=True if self.device == 'cuda' else False
         )
         
         test_loss = 0
@@ -94,7 +108,7 @@ class Client:
         
         with torch.no_grad():
             for data, target in test_loader:
-                data, target = data.to(self.device), target.to(self.device)
+                data, target = data.to(self.device, non_blocking=True), target.to(self.device, non_blocking=True)
                 
                 # Forward pass
                 output = self.model(data)

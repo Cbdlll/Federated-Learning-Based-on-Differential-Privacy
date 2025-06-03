@@ -10,29 +10,36 @@ from typing import List, Tuple, Dict
 
 class MNISTDataset(Dataset):
     """MNIST wrapper for easier handling in federated learning context"""
-    def __init__(self, data, targets, transform=None):
+    def __init__(self, data, targets, transform=None, device=None):
         self.data = data
         self.targets = targets
         self.transform = transform
+        self.device = device
 
     def __getitem__(self, index):
         img, target = self.data[index], int(self.targets[index])
 
         if self.transform is not None:
             img = self.transform(img)
+            
+        # Move to device if specified and GPU is available
+        if self.device == 'cuda' and torch.cuda.is_available():
+            img = img.to(self.device, non_blocking=True)
+            target = torch.tensor(target).to(self.device, non_blocking=True)
 
         return img, target
 
     def __len__(self):
         return len(self.data)
 
-def load_and_split_data(num_clients: int = 10, iid: bool = True) -> Tuple[List[Dataset], List[Dataset]]:
+def load_and_split_data(num_clients: int = 10, iid: bool = True, device: str = 'cpu') -> Tuple[List[Dataset], List[Dataset]]:
     """
     Load MNIST data and split among clients
     
     Args:
         num_clients: Number of clients to split data for
         iid: If True, split data randomly (IID), else split by labels (non-IID)
+        device: Device to load data on ('cpu' or 'cuda')
         
     Returns:
         Tuple of (train_datasets, test_datasets) where each is a list of datasets for each client
