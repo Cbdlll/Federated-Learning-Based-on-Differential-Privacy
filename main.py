@@ -54,7 +54,7 @@ def main():
     parser.add_argument('--dp_epsilon_values', type=parse_float_with_inf, nargs='+', default=None, help='List of epsilon values to test')
     parser.add_argument('--dp_delta', type=float, default=1e-5, help='Differential privacy delta parameter')
     parser.add_argument('--dp_max_grad_norm', type=float, default=1.0, help='Maximum gradient norm for DP')
-    parser.add_argument('--noise_type', type=str, default='gaussian', help='Noise type for DP')
+    parser.add_argument('--noise_type', type=str, default='gaussian', help='Noise type for DP ("gaussian" or "laplace")')
     parser.add_argument('--seed', type=int, default=42, help='Random seed')
     parser.add_argument('--log_interval', type=int, default=1, help='Log interval')
     parser.add_argument('--num_workers', type=int, default=4, help='Number of workers for data loading')
